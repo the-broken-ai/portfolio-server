@@ -1,0 +1,54 @@
+# Django project files
+*.pyc
+*.pyo
+__pycache__/
+*.sqlite3
+
+# Static files
+staticfiles/
+*.css
+*.js
+
+# Media files
+media/
+
+# Virtual environment
+venv/
+.env
+
+# IDE files
+.vscode/
+.idea/
+
+# Dependency directories
+node_modules/
+bower_components/
+
+# Compiled Python files
+*.pyc
+*.pyo
+
+# Logs and databases
+*.log
+*.sqlite3
+
+# Environment variables
+.env
+
+# Ignore local settings
+local_settings.py
+
+# Ignore secret key
+secret_key.txt
+
+# Ignore database configuration
+db_config.json
+
+# Ignore development files
+*.bak
+*.swp
+*.swo
+*.tmp
+*.temp
+*.old
+*.~lock.*
