@@ -26,19 +26,21 @@ SECRET_KEY = "django-insecure--%-_1!1y!8o79lfs6%%*z=y(7l@1cln!y$(oqfd!w+u6c9&7=$
 DEBUG = True
 
 ALLOWED_HOSTS = [
-   'localhost',
-   '127.0.0.1',
-    '192.168.2.100',
-    'aetherlink.ca',
-    'glitched.me',
-    'echoridge.me',
-    'home.brokenai.ca',
+    "localhost",
+    "127.0.0.1",
+    "192.168.2.100",
+    "aetherlink.ca",
+    "glitched.me",
+    "echoridge.me",
+    "home.brokenai.ca",
 ]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    "corsheaders",
+    "rest_framework",
     "home.apps.HomeConfig",
     "django.contrib.admin",
     "django.contrib.auth",
@@ -49,6 +51,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -63,7 +66,9 @@ ROOT_URLCONF = "Portfolio.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [
+            BASE_DIR / "templates",
+        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -125,8 +130,27 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = "static/"
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication",
+    ],
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",
+    ],
+}
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "https://aetherlink.ca",
+]

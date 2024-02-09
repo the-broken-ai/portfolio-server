@@ -1,8 +1,10 @@
 from django.urls import path
-
-from . import views
+from home import views
 
 urlpatterns = [
     path("", views.index, name="index"),
-    path("models", views.my_model_view, name="my_model_view")
+    path("getpersoninfo/", views.json_personInfo, name="return_json"),
+    path("getpostinfo/", views.json_PostInfo, name="return_json"),
+    path("post/",views.submit, name="submit"),
+    path("person/", views.PersonList.as_view(), name="person_list"),
 ]
