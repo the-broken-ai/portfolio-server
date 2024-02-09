@@ -65,11 +65,11 @@ def submit(request):
     if request.method == "POST":
         first_name = request.POST.get("firstName")
         last_name = request.POST.get("lastName")
+        username = request.POST.get("username")
         email = request.POST.get("email")
         phone = request.POST.get("phone")
         address = request.POST.get("address")
         github = request.POST.get("github")
-        username = request.POST.get("username")
 
         person = models.Person(
             first_name=first_name,
