@@ -1,5 +1,5 @@
-# Portfolio Server :: API based
-Backend Server for portfolion built using Django with REST framework. 
+# Portfolio Server
+Backend Server for portfolio built using Django. 
 
 to run:
 ```
