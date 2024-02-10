@@ -25,14 +25,18 @@ SECRET_KEY = "django-insecure-xx-uvrpb69fe$*p)%-taxznhl@p%vt7b-!2l9q^zayu&*y2cwm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "192.168.2.100",
+    "localhost",
+    "aetherlink.ca",
+]
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'home',
-    'rest_framework',
+    "home",
+    "rest_framework",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -42,6 +46,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -77,9 +82,14 @@ WSGI_APPLICATION = "Portfolio.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "wpdb",
+        "USER": "user",
+        "PASSWORD": "root",
+        "HOST": "192.168.2.12",
+        "PORT": "3306",
     }
+    
 }
 
 
@@ -129,3 +139,6 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
 }
+
+# APPEND_SLASH = True
+
