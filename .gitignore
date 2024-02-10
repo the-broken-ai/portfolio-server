@@ -1,0 +1,40 @@
+# Django
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3
+
+# Django Rest Framework
+*.swagger.json
+*.yaml
+*.yml
+# Python
+*.pyc
+__pycache__/
+venv/
+*.env
+
+# Django
+*.log
+db.sqlite3
+
+# Django Rest Framework
+*.key
+
+# React
+/node_modules/
+/build/
+
+# Node.js
+/node_modules/
+
+# HTML
+*.html
+
+# CSS
+*.css
+
+# JavaScript
+*.js
