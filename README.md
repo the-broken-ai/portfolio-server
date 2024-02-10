@@ -14,3 +14,7 @@ pip install django
 pip install djangorestframeworks
 ```
 
+```
+py manage.py runserver
+py manage.py runserver 0.0.0.0:8000
+```
