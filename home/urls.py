@@ -8,4 +8,5 @@ from home import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('submit/', views.submit, name='submit'),
+    path('api-token-auth/', views.CustomObtainAuthToken.as_view()),
 ]

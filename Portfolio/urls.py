@@ -24,6 +24,9 @@ router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
 router.register(r'posts', views.PostViewSet)
 router.register(r'members', views.MemberViewSet)
+router.register(r'images', views.ImageViewSet)
+router.register(r'comments', views.CommentViewSet)
+router.register(r'imageposts', views.ImagePostViewSet)
 
 
 # Wire up our API using automatic URL routing.

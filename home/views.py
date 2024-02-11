@@ -1,22 +1,48 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from django.http import HttpResponse, JsonResponse
 # Create your views here.
 from django.contrib.auth.models import Group, User
 
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
 
-from home.models import Post, Member
+from home.models import Post, Member, Image, Comment
 
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework import permissions, viewsets
 
-from home.serializers import GroupSerializer, UserSerializer, PostSerializer, MemberSerializer, SubmitSerializer
+from home.serializers import GroupSerializer, UserSerializer, PostSerializer, MemberSerializer, SubmitSerializer, ImageSerializer, CommentSerializer, ImagePostSerializer
 
 
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.authtoken.models import Token
 
+class ImageViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows images to be viewed or edited.
+    """
+    queryset = Image.objects.all()
+    serializer_class = ImageSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    
+class CommentViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows comments to be viewed or edited.
+    """
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    
+class ImagePostViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows imageposts to be viewed or edited.
+    """
+    queryset = Image.objects.all()
+    serializer_class = ImagePostSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -75,7 +101,19 @@ def submit(request):
         
         member = Member(name=name, email=email, password=password, github=github)
         member.save()
-    return HttpResponse("Submit successfully")
+        return JsonResponse({"status": "success"})
+    else:
+        return JsonResponse({"status": "failed"})
+    
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
+    return redirect("http://192.168.2.21:3000")
+
+
+
+
+class CustomObtainAuthToken(ObtainAuthToken):
+    def post(self, request, *args, **kwargs):
+        response = super(CustomObtainAuthToken, self).post(request, *args, **kwargs)
+        token = Token.objects.get(key=response.data['token'])
+        return Response({'token': token.key, 'user_id': token.user_id})

@@ -1,6 +1,6 @@
 from django.contrib.auth.models import Group, User
 from rest_framework import serializers
-from home.models import Post, Member
+from home.models import Post, Member, Image, Comment
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -17,12 +17,29 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 class PostSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Post
-        fields = ['url', 'title', 'content', 'date_posted', 'author']
+        fields = ['url', 'title', 'content', 'date_posted', 'author', 'cover_image', 'repository', 'contributors']
         
 class MemberSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Member
-        fields = ['url', 'name', 'email', 'password', 'github', 'date_joined']
+        fields = ['url', 'name', 'email', 'password', 'github', 'date_joined', 'username']
+        
+    
+class ImageSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Image
+        fields = ['url', 'title', 'image', 'date_posted', 'author']
+        
+class CommentSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Comment
+        fields = ['url', 'content', 'date_posted', 'author', 'post']
+        
+class ImagePostSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Image
+        fields = ['url', 'title', 'image', 'date_posted', 'author']
+        
         
 class SubmitSerializer(serializers.Serializer):
     name = serializers.CharField(max_length=100)
