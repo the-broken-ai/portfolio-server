@@ -23,15 +23,15 @@ class Image(models.Model):
     def __str__(self):
         return self.title
     
+
 class Post(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
     date_posted = models.DateTimeField(auto_now_add=True)
-    author = models.ForeignKey(Member, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     cover_image = models.ImageField(upload_to='images/', blank=True, null=True)
-    # images = models.ManyToManyField(Image)
     repository = models.URLField(max_length=100, blank=True, null=True)
-    contributors = models.ManyToManyField(Member, related_name="contributors", blank=True)
+    contributors = models.ManyToManyField(User, related_name='contributors', blank=True)
     
     def __str__(self):
         return self.title

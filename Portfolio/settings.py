@@ -26,6 +26,7 @@ SECRET_KEY = "django-insecure-xx-uvrpb69fe$*p)%-taxznhl@p%vt7b-!2l9q^zayu&*y2cwm
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    "192.168.2.21",
     "192.168.2.100",
     "localhost",
     "aetherlink.ca",
@@ -148,3 +149,4 @@ REST_FRAMEWORK = {
 
 # APPEND_SLASH = True
 
+CORS_ALLOW_ALL_ORIGINS = True
