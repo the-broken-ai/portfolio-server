@@ -1,18 +1,20 @@
 from django.db import models
 from django.contrib.auth.models import Group, User
+from django.utils import timezone
 
 # Create your models here.
 
 
 class Member(models.Model):
-    name = models.CharField(max_length=100, blank=True, null=True)
-    email = models.EmailField(max_length=100, blank=True, null=True)
-    password = models.CharField(max_length=100, blank=True, null=True)
-    github = models.CharField(max_length=100, blank=True, null=True)
-    date_joined = models.DateTimeField(auto_now_add=True, blank=True, null=True)
-    username = models.CharField(max_length=100, blank=True, null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    username = models.CharField(max_length=100, unique=True)
+    email = models.EmailField(max_length=100, unique=True)
+    github = models.URLField(max_length=200, blank=True)
+    date_joined = models.DateTimeField(default=timezone.now)
+
     def __str__(self):
-        return self.name
+        return self.username
 
 class Image(models.Model):
     title = models.CharField(max_length=100)
@@ -25,14 +27,11 @@ class Image(models.Model):
     
 
 class Post(models.Model):
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=255)
     content = models.TextField()
-    date_posted = models.DateTimeField(auto_now_add=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
-    cover_image = models.ImageField(upload_to='images/', blank=True, null=True)
-    repository = models.URLField(max_length=100, blank=True, null=True)
-    contributors = models.ManyToManyField(User, related_name='contributors', blank=True)
-    
+    cover_image = models.ImageField(upload_to='posts/', blank=True)
+    author = models.ForeignKey(Member, on_delete=models.CASCADE, related_name='posts')
+
     def __str__(self):
         return self.title
     
